@@ -6,7 +6,18 @@
 <title>Messenger demo</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&display=swap">
 <style>
-*{box-sizing:border-box;margin:0}html,body,#root{height:100%}body{background:#000;color:#fff;font:15px/1.4 "Hanken Grotesk","Helvetica Neue",Arial,sans-serif}.app{display:flex;flex-direction:column;height:100%}.log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}.msg{max-width:84%;padding:10px 14px;border-radius:18px;white-space:pre-line}.bot{background:#1c1c1c;align-self:flex-start}.me{background:#fff;color:#000;align-self:flex-end}.dots{color:#888;letter-spacing:.2em}.replies{display:flex;flex-wrap:wrap;gap:8px;padding:8px 16px 16px;min-height:24px}.replies button{background:none;color:#fff;border:1.5px solid #fff;border-radius:999px;padding:8px 16px;font:inherit;cursor:pointer}.replies button:hover,.replies button:focus-visible{background:#fff;color:#000;outline:none}
+*{box-sizing:border-box;margin:0}
+html,body,#root{height:100%}
+body{background:#000;color:#fff;font:15px/1.4 "Hanken Grotesk","Helvetica Neue",Arial,sans-serif}
+.app{display:flex;flex-direction:column;height:100%}
+.log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:84%;padding:10px 14px;border-radius:18px;white-space:pre-line}
+.bot{background:#1c1c1c;align-self:flex-start}
+.me{background:#fff;color:#000;align-self:flex-end}
+.dots{color:#888;letter-spacing:.2em}
+.replies{display:flex;flex-wrap:wrap;gap:8px;padding:8px 16px 16px;min-height:24px}
+.replies button{background:none;color:#fff;border:1.5px solid #fff;border-radius:999px;padding:8px 16px;font:inherit;cursor:pointer}
+.replies button:hover,.replies button:focus-visible{background:#fff;color:#000;outline:none}
 </style>
 </head>
 <body>
@@ -17,29 +28,118 @@
 var PATHS=[
   {t:"The FAQ pilot",to:"p1"},
   {t:"Navigating Open Messaging",to:"p2"},
-  {t:"Learning good governance",to:"p3"}
+  {t:"Embedding good governance",to:"p3"}
 ];
-function remaining(v){var r=PATHS.filter(function(p){return !v[p.to]});return r.length?r:[{t:"Start again",to:"start"}]}
+function remaining(v){
+  var r=PATHS.filter(function(p){return !v[p.to]});
+  return r.length?r:[{t:"Build a Virtual Curator",to:"start"}];
+}
 var nodes={
-  start:{bot:"Hi, I’m Jack, Digital Curator.\n\nI build and design bots and customer experiences, whilst providing and acting upon insights and finding ways to deploy faster and safer.\n\nBelow you’ll find a few options which will explore where I started, as well as some early challenges, and where I am today.",replies:function(){return PATHS}},
-  p1:{bot:["The FAQ pilot was the bank's first venture into chatbots, a simple web messenger was placed on the bank’s savings account’s product page.","It's where I got to grips with the basics: Architect message flows, digital bot flows, knowledge and bot analytics."],replies:[{t:"Where are we now?",to:"p1b"}]},
-  p1b:{bot:["Since February 2026, I’ve introduced triage bots, developed and integrated travel notification and transaction dispute tools which reduced banker effort, introduced knowledge that contains almost half of all interactions within the bot (with no banker involved), which forms just part of the bot’s overall ~65% business hours containment rate each month.","I’ve achieved this all whilst preparing for the bank to develop integrations into their CRMs, which will enable agentic agents to evolve from just reducing, to eliminating banker effort.","Chat has exponentially grown as a channel since bots were first introduced. Today, there are more chat interactions than voice; however, the channel has become efficient enough to require significantly fewer chat agents than voice agents.","This is as a result of orchestrating various tools and specialists knowledge, from Operative Intelligence insights to my experience as a training facilitator and a decade spent in retail environments."],replies:[{t:"What am I working on right now?",to:"p1c"}]},
-  p1c:{bot:["As of November 2026, I'm currently preparing several simultaneous releases.",{t:"One gives customers an additional channel to discuss new home loan applications.",d:2000},{t:"Another is a low-cost, temporary internet banking chat that relies on banker process. My contact centre SME knowledge made that possible, and it works around the technical limits on integration and authentication.",d:2000},{t:"I'm updating our existing authenticated in-app chat, which removes the after-hours channel and makes our knowledge bots available all hours of the day and night.",d:2500},{t:"And I'm working on an agentic virtual agent (AVA) with a near-complete servicing knowledge of our home loan products.",d:2500}],replies:remaining},
-  p2:{bot:["The Bank’s Open Messaging middleware began as a literal blank slate.","When I was first appointed as the bank’s ‘Digital Curator’, everyone who engaged with the channel went straight to a banker, with disclaimers delivered through data tables.","That led to countless ‘blank’ interactions and resulted in numerous banker inefficiencies.","The bespoke Open Messaging environment limited how many bots I could release at first. So I released short but effective triage conversations instead. Sometimes all it takes is a bot asking no more than “how can we help you?” - although by no means was that ever treated as the finish line.","I ultimately partnered with the mobile app team responsible for the middleware, and together we resolved the outstanding technical issues."],replies:[{t:"Where are we now?",to:"p2b"}]},
-  p2b:{bot:["I helped develop quick replies that when present, locks the keyboard.","That matters in a regulated bank. A written expression of hardship or a complaint that goes un-actioned could result in regulatory action.","With no free text during the triage experience (right up until they’re passed to a banker), there's nothing to miss.","I worked with the mobile app team to build an experience that does more than route customers. It reduces the bank’s regulatory risk as well."],replies:remaining},
-  p3:{bot:["I built relationships with risk and compliance stakeholders and brought them along for the journey.","I applied their feedback and gave them visual technical demonstrations, which later proved useful in developing knowledge bases for AI agents."],replies:[{t:"Where are we now?",to:"p3b"}]},
-  p3b:{bot:["I've deployed enough releases that they now qualify as a \"standard change\". That means faster implementation and less formal documentation.","Because the risk is well understood, each release moves through a lighter process.","That speed makes it possible to run several releases at once, without each one starting from scratch.","It's built on the trust from the governance work: the relationships with risk and compliance, and the feedback I applied along the way."],replies:[{t:"What's next?",to:"p3c"}]},
-  p3c:{bot:["With the business's limited AI tools, I replicated programs like Cursor inside basic AI models, by creating dedicated AI agents with comprehensive knowledge bases.","Only because governance required so much documentation did I have the material to feed those agents."],replies:[{t:"What can the agent do?",to:"p3d"}]},
-  p3d:{bot:["It can write and complete test cases, amend and create chatbot scripts in the expected formats, and create spec docs that carry between AI conversations, all while ensuring the human is kept in the loop.","With imported YAML files, it also gives technical guidance that would otherwise be limited by one SME's knowledge and experience, often enabling the previously thought impossible."],replies:remaining}
+  start:{
+    bot:"Hi, I’m Jack, Digital Curator.\n\nWith a decade spent close to customers, I specialise in finding creative, low-cost solutions that make the most of available resources and improve the customer experience today, whilst preparing heavily regulated industries for future technical horizons.\n\nBy developing good governance and acting on data insights to identify opportunity, I create and design bots that facilitate improved customer experiences that reduce cost and make it easier for customers to navigate to appropriate support.\n\nBelow you’ll find a few options that explore where I started, some early challenges, and where I am today.",
+    replies:function(){return PATHS}
+  },
+  p1:{
+    bot:["In last quarter of 2024, a simple pilot was the bank’s first venture into chatbots: an FAQ web messenger, which was placed on one of the bank’s savings account’s product page.",
+         "The product page was chosen due to its complex bonus interest criteria, which had led to an influx of enquiries to the bank’s contact centre.",
+         "With the guidance of developers from both Genesys and Telstra, it’s where I got to grips with the basics: Architect message flows, digital bot flows, knowledge and bot analytics."],
+    replies:[{t:"Where are we now?",to:"p1b"}]
+  },
+  p1b:{
+    bot:["Since February 2026, I’ve introduced triage bots, developed and integrated travel notification and transaction dispute tools which reduced banker effort; I introduced knowledge that contains almost half of all interactions, without requiring a banker, which in addition to quick reply navigation to common enquiries, forms part of the bot’s overall ~65% business hours containment rate each month.",
+         "I’ve achieved this all whilst preparing for the bank to develop integrations into their CRMs, which will enable agentic agents to evolve from simply reducing, to completely eliminating low-value banker effort.",
+         "Chat has exponentially grown as a channel since bots were first introduced. Today, there are considerably more chat interactions than voice; however, the channel has become efficient enough to require significantly fewer chat agents than voice agents.",
+         "This is as a result of orchestrating various tools and specialists knowledge, from Operative Intelligence insights to my experience as a training facilitator and a decade spent in retail environments."],
+    replies:[{t:"What am I working on right now?",to:"p1c"}]
+  },
+  p1c:{
+    bot:["As of November 2026, I’m currently preparing several simultaneous releases:",
+         {t:"One gives customers an additional channel to discuss new home loan applications.",d:2000},
+         {t:"Another is a low-cost, temporary internet banking chat that relies on banker process and basic automation via Genesys work-items to overcome technical challenges inherent with the online banking platform.",d:2000},
+         {t:"I’m also updating our existing authenticated in-app chat, which is an enhancement that removes the after-hours channel and makes our knowledge bots available all hours of the day and night by moving the flow’s schedule check to the bot’s pre-queue activities, rather than the initial Message Flow.",d:2500},
+         {t:"Most excitingly, I’ve been developing an Agentic Virtual Agent (AVA) with a near-complete servicing knowledge of our home loan products, thanks to the invaluable assistance of my Virtual Curator - a dedicated AI program that can do all the ‘grunt work’ that would often constitute the majority of my time.",d:2500}],
+    replies:remaining
+  },
+  p2:{
+    bot:["I was fortunate that the Bank’s Open Messaging middleware began as a literal blank slate.",
+         "When I was first appointed as the bank’s ‘Digital Curator’, every customer who engaged with the channel went straight to a banker, with disclaimers delivered through data tables.",
+         "That led to countless ‘blank’ interactions and by consequence, numerous banker inefficiencies.",
+         "Due to technical challenges with the bespoke Open Messaging environment, I was limited in how many bots I could initially release. So I preferenced short but effective triage conversations instead. Sometimes all it takes is a bot asking no more than “how can we help you?” - although it represented a start, it was by no means ever treated as the finish line.",
+         "I ultimately partnered with the mobile app team responsible for the channel’s middleware, and together we resolved the outstanding technical issues and stabilised the channel."],
+    replies:[{t:"Where are we now?",to:"p2b"}]
+  },
+  p2b:{
+    bot:["Due to the bespoke environment, simple features such as quick replies and typing indicators aren’t switched on, but built instead. As such, I worked with internal stakeholders to develop quick replies that when present, locks the keyboard.",
+         "That matters in a regulated bank. As a written expression of hardship or a complaint that goes un-actioned could result in regulatory action.",
+         "With no free text during the triage experience (right up until they’re passed to a banker), there’s nothing to miss, ensuring genuine enquiries can reach appropriate support.",
+         "In other words, I created an experience that does more than just route customers, it reduces the bank’s regulatory risk as well."],
+    replies:remaining
+  },
+  p3:{
+    bot:["I built relationships with risk and compliance stakeholders and brought them along for the journey.",
+         "I applied their feedback, and made sure they were as much an authority on the bot flows as they needed to be to make practical, informed judgements."],
+    replies:[{t:"Where are we now?",to:"p3b"}]
+  },
+  p3b:{
+    bot:["I’ve now deployed enough releases that each change qualifies as a \"standard change\". That means faster implementation, building on existing testing evidence and technical documentation.",
+         "Because the risk is well understood, I can run simultaneous releases without each one starting from scratch.",
+         "This engagement with our key stakeholders produced a lot of documentation: build documents, testing evidence and records of every conversation with risk and compliance - as well as copies of their own internal risk documentation and criteria.",
+         "I used the business’ limited AI tools to replicate programs like Cursor inside basic AI models, creating a dedicated agent with enough knowledge to support faster and safer implementations.",
+         "I call it my Virtual Curator, a nod to my own job title. And anyone with an AI system that is embedded into their internal documentation and communications can make the same, with limited specialist technical knowledge, ultimately reducing key man risk."],
+    replies:[{t:"What can the Virtual Curator do?",to:"p3c"}]
+  },
+  p3c:{
+    bot:["It writes and completes test cases.",
+         "It amends and creates chatbot scripts in the expected formats.",
+         "It creates spec docs that carry from one conversation to the next, ensuring version control and capturing details that might have otherwise been lost in the minutia of the day-to-day.",
+         "When I give it a brief, it also checks the requirements against the bank’s internal risk documentation and flags conflicts or points of interest."],
+    replies:[{t:"How does a human stay in the loop?",to:"p3d"}]
+  },
+  p3d:{
+    bot:["Every decision that shapes the bot’s final design goes through me. The Virtual Curator advises and checks, and I implement. It ensures that I understand the change before committing to it.",
+         "By imported YAML files exported from a bot flow, it also gives technical guidance that would otherwise be limited by one’s available SME’s knowledge and experience, allowing for great, sometimes ambitious ideas to be executed with confidence.",
+         "The Digital Curator designs. The Virtual Curator remembers and checks. The decisions stay human - as does the accountability."],
+    replies:remaining
+  }
 };
 var h=React.createElement,useState=React.useState,useEffect=React.useEffect,useRef=React.useRef;
-function App(){var a=useState([]),msgs=a[0],setMsgs=a[1];var b=useState(null),node=b[0],setNode=b[1];var c=useState(false),typing=c[0],setTyping=c[1];var visited=useRef({}),end=useRef(null);
-function say(lines,i,done){var l=lines[i],text=typeof l==="string"?l:l.t,wait=typeof l==="string"?650:l.d;setTyping(true);setTimeout(function(){setMsgs(function(m){return m.concat([{who:"bot",t:text}])});setTyping(false);if(i+1<lines.length){say(lines,i+1,done)}else{done()}},wait)}
-function go(id){if(id==="start")visited.current={};else if(id==="p1"||id==="p2"||id=== "p3")visited.current[id]=true;setNode(null);var lines=nodes[id].bot;if(!Array.isArray(lines))lines=[lines];say(lines,0,function(){setNode(id)})}
-function pick(r){setMsgs(function(m){return m.concat([{who:"me",t:r.t}])});go(r.to)}
-useEffect(function(){go("start")},[]);useEffect(function(){end.current&&end.current.scrollIntoView({block:"end"})},[msgs,typing,node]);
-var rep=[];if(node){var r=nodes[node].replies;rep=typeof r=== "function"?r(visited.current):r}
-return h("div",{className:"app"},h("div",{className:"log"},msgs.map(function(m,i){return h("div",{key:i,className:"msg "+m.who},m.t)}),typing&&h("div",{className:"msg bot dots","aria-label":"Typing"},"..."),h("div",{ref:end})),h("div",{className:"replies"},rep.map(function(r){return h("button",{key:r.t,onClick:function(){pick(r)}},r.t)})))}
+function App(){
+  var a=useState([]),msgs=a[0],setMsgs=a[1];
+  var b=useState(null),node=b[0],setNode=b[1];
+  var c=useState(false),typing=c[0],setTyping=c[1];
+  var visited=useRef({}),end=useRef(null);
+  function say(lines,i,done){
+    var l=lines[i],text=typeof l==="string"?l:l.t,wait=typeof l==="string"?650:l.d;
+    setTyping(true);
+    setTimeout(function(){
+      setMsgs(function(m){return m.concat([{who:"bot",t:text}])});
+      setTyping(false);
+      if(i+1<lines.length){say(lines,i+1,done)}else{done()}
+    },wait);
+  }
+  function go(id){
+    if(id==="start"){visited.current={}}else if(id==="p1"||id==="p2"||id=== "p3"){visited.current[id]=true}
+    setNode(null);
+    var lines=nodes[id].bot;
+    if(!Array.isArray(lines))lines=[lines];
+    say(lines,0,function(){setNode(id)});
+  }
+  function pick(r){
+    setMsgs(function(m){return m.concat([{who:"me",t:r.t}])});
+    go(r.to);
+  }
+  useEffect(function(){go("start")},[]);
+  useEffect(function(){end.current&&end.current.scrollIntoView({block:"end"})},[msgs,typing,node]);
+  var rep=[];
+  if(node){var r=nodes[node].replies;rep=typeof r==="function"?r(visited.current):r}
+  return h("div",{className:"app"},
+    h("div",{className:"log"},
+      msgs.map(function(m,i){return h("div",{key:i,className:"msg "+m.who},m.t)}),
+      typing&&h("div",{className:"msg bot dots","aria-label":"Typing"},"..."),
+      h("div",{ref:end})),
+    h("div",{className:"replies"},
+      rep.map(function(r){return h("button",{key:r.t,onClick:function(){pick(r)}},r.t)})));
+}
 ReactDOM.createRoot(document.getElementById("root")).render(h(App));
 </script>
 </body>
