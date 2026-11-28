@@ -16,8 +16,10 @@ body{background:#000;color:#fff;font-family:var(--text);-webkit-font-smoothing:a
 .name{font-family:var(--display);font-weight:400;line-height:.72;font-size:clamp(4.5rem,17vw,11rem);letter-spacing:.01em}
 .surname{display:block;position:relative;color:#bdbdbd;font-size:.52em;line-height:.8;margin-top:.3em}
 .pill{font-style:italic;font-weight:400;font-size:clamp(.85rem,1.4vw,1rem);border:1.5px solid #fff;border-radius:999px;padding:.55em 1.3em;margin-top:2.5rem}
-.demo-page{background:#000;padding:0}
-.demo-page iframe{width:100%;height:100svh;border:0}
+.demo-page{align-items:center;justify-content:center;padding:clamp(1.5rem,6vw,5rem);background:#fff}
+.chat-frame{width:min(100%,360px);aspect-ratio:9/14;background:#000;border:1.5px solid #fff;overflow:hidden}
+.chat-frame iframe{width:100%;height:100%;border:0;display:block}
+@media(max-width:760px){.demo-page{padding:4.5rem 1rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -28,7 +30,7 @@ body{background:#000;color:#fff;font-family:var(--text);-webkit-font-smoothing:a
 <p class="pill">Progress by design</p>
 </header>
 <main class="page demo-page" id="demo">
-<iframe src="demo-messenger.html" title="Interactive conversation with Jack Appleton" loading="eager"></iframe>
+<div class="chat-frame"><iframe src="demo-messenger.html" title="Interactive conversation with Jack Appleton" loading="eager"></iframe></div>
 </main>
 </body>
 </html>
